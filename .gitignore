@@ -1,0 +1,5 @@
+.env
+budgetmate.db
+__pycache__/
+*.pyc
+.venv/
