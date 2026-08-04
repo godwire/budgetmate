@@ -144,7 +144,7 @@ st.markdown(
         box-shadow: 0 0 24px rgba(176, 38, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.4);
     }
     .bm-card-title { font-weight: 700; font-size: 1.02rem; color: #fff; margin-bottom: 0.15rem; }
-    .bm-card-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .bm-card-row { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; }
     .bm-card-amount { font-weight: 600; color: var(--bm-muted); font-size: 0.92rem; }
     .bm-card-sub { color: var(--bm-muted); font-size: 0.85rem; margin-top: 0.4rem; }
     .bm-card-warning { color: var(--bm-danger); font-weight: 600; font-size: 0.88rem; margin-top: 0.4rem; text-shadow: 0 0 10px rgba(255, 56, 96, 0.5); }
@@ -270,7 +270,7 @@ tab_add, tab_overview, tab_limits, tab_goals, tab_advice = st.tabs(
 with tab_add:
     st.subheader("Новая трата")
     with st.form("add_expense_form", clear_on_submit=True):
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2, vertical_alignment="bottom")
         amount = col1.number_input("Сумма (EUR)", min_value=0.0, step=0.5)
         expense_date = col2.date_input("Дата", value=date.today())
         description = st.text_input("Описание (например: 'кофе в Costa', 'Lidl')")
@@ -304,7 +304,7 @@ with tab_overview:
         df = pd.DataFrame(expenses)
         df["date"] = pd.to_datetime(df["date"])
 
-        search_col, category_col, sort_col = st.columns([1.3, 1, 1])
+        search_col, category_col, sort_col = st.columns([1.3, 1, 1], vertical_alignment="bottom")
         search_query = search_col.text_input(
             "🔍 Поиск по транзакциям",
             placeholder="Например: 'кофе' или 'Lidl'",
@@ -397,7 +397,7 @@ with tab_limits:
     st.subheader("Лимиты по категориям")
 
     with st.form("add_limit_form"):
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2, vertical_alignment="bottom")
         limit_category = col1.selectbox(
             "Категория", options=all_categories(), format_func=lambda c: f"{icon_for(c)} {c}"
         )
@@ -450,7 +450,7 @@ with tab_goals:
 
     with st.form("add_goal_form"):
         goal_name = st.text_input("Название цели (например: 'Поездка в Прагу')")
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2, vertical_alignment="bottom")
         target_amount = col1.number_input("Целевая сумма (EUR)", min_value=0.0, step=10.0)
         deadline = col2.date_input("Дедлайн")
         if st.form_submit_button("🎯 Добавить цель") and goal_name:
@@ -489,7 +489,7 @@ with tab_goals:
                 unsafe_allow_html=True,
             )
 
-            gcol1, gcol2 = st.columns([3, 1])
+            gcol1, gcol2 = st.columns([3, 1], vertical_alignment="bottom")
             new_saved = gcol1.number_input(
                 f"Обновить накопленную сумму для '{goal['name']}'",
                 min_value=0.0,
