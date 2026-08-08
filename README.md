@@ -1,70 +1,76 @@
 # BudgetMate
 
-AI-ассистент для управления финансами студента: учёт трат, автокатегоризация,
-лимиты по категориям, цели накоплений и AI-советы по экономии на базе Claude.
- yes 
- yep
-## Запуск в VSCode
+An AI-powered personal finance assistant for students. BudgetMate helps you track expenses, automatically categorize them, set spending limits, define savings goals, and get personalized money-saving advice powered by Claude.
 
-1. Открой папку `budgetmate` в VSCode (File → Open Folder).
+## Features
 
-2. Создай виртуальное окружение и активируй его. В терминале VSCode
-   (Terminal → New Terminal):
+- **Expense tracking** — log your spending as you go
+- **Automatic categorization** — expenses are sorted into categories based on keywords
+- **Spending limits** — set a budget per category and keep an eye on it
+- **Savings goals** — define goals and track your progress toward them
+- **AI savings advice** — get personalized tips based on your real spending data, powered by the Claude API
 
-   ```bash
-   python -m venv .venv
-   ```
+## Getting Started (VS Code)
 
-   Windows:
-   ```bash
-   .venv\Scripts\activate
-   ```
+### 1. Open the project
+Open the `budgetmate` folder in VS Code: **File → Open Folder**.
 
-   macOS / Linux:
-   ```bash
-   source .venv/bin/activate
-   ```
+### 2. Create and activate a virtual environment
+Open a terminal in VS Code (**Terminal → New Terminal**) and run:
 
-   В правом нижнем углу VSCode нажми на версию Python и выбери интерпретатор
-   из `.venv`, если он не подхватился автоматически.
+```bash
+python -m venv .venv
+```
 
-3. Установи зависимости:
+Then activate it:
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+**Windows**
+```bash
+.venv\Scripts\activate
+```
 
-4. (Опционально, для вкладки AI-советы) Создай файл `.env` рядом с `app.py`
-   на основе `.env.example` и впиши туда свой ключ Anthropic API:
+**macOS / Linux**
+```bash
+source .venv/bin/activate
+```
 
-   ```
-   ANTHROPIC_API_KEY=sk-ant-...
-   ```
+> If VS Code doesn't automatically detect the virtual environment, click the Python version shown in the bottom-right corner and select the interpreter from `.venv`.
 
-   Без ключа всё остальное приложение (траты, категории, лимиты, цели)
-   работает как обычно — просто вкладка AI-советов покажет сообщение,
-   что ключ не найден.
+### 3. Install dependencies
 
-5. Запусти приложение:
+```bash
+pip install -r requirements.txt
+```
 
-   ```bash
-   streamlit run app.py
-   ```
+### 4. (Optional) Set up the AI Advice tab
+To use the AI-powered savings advice tab, create a `.env` file next to `app.py`, based on `.env.example`, and add your Anthropic API key:
 
-   Браузер откроется автоматически на `http://localhost:8501`. База данных
-   `budgetmate.db` (SQLite) создастся сама при первом запуске в той же папке.
+```
+ANTHROPIC_API_KEY=sk-ant-...
+```
 
-## Структура проекта
+Without this key, the rest of the app (expenses, categories, limits, goals) still works normally — the AI Advice tab will simply show a message that no key was found.
 
-- `app.py` — интерфейс на Streamlit (5 вкладок: добавить трату, обзор,
-  лимиты, цели, AI-советы)
-- `database.py` — работа с SQLite (таблицы expenses, limits, goals)
-- `categorize.py` — автоматическая категоризация трат по ключевым словам
-- `ai_advisor.py` — сборка сводки трат и запрос советов у Claude API
+### 5. Run the app
 
-## Что можно добавить дальше
+```bash
+streamlit run app.py
+```
 
-- Импорт трат из CSV-выписки банка
-- Более умная категоризация (ML-классификатор вместо ключевых слов)
-- Карта трат по местам
-- Поиск лучших предложений на товары и сравнение цен в магазинах
+Your browser will open automatically at `http://localhost:8501`. A SQLite database file, `budgetmate.db`, is created automatically in the project folder on first run.
+
+## Project Structure
+
+| File | Description |
+|---|---|
+| `app.py` | Streamlit interface (5 tabs: Add Expense, Overview, Limits, Goals, AI Advice) |
+| `database.py` | SQLite database logic (`expenses`, `limits`, `goals` tables) |
+| `categorize.py` | Automatic expense categorization based on keywords |
+| `ai_advisor.py` | Builds a spending summary and requests advice from the Claude API |
+
+## Ideas for the Future
+
+- Import expenses from a bank CSV statement
+- Smarter categorization (ML classifier instead of keyword matching)
+- Map view of spending locations
+- Price comparison across stores to find the best deals
